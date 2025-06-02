@@ -15,9 +15,10 @@ def query_sdss_sql_server():
     sdss_url = 'https://skyserver.sdss.org/dr18/SkyServerWS/SearchTools/SqlSearch'
     sql_query = \
     """
-    SELECT TOP 1000 ra, dec
-    FROM PhotoObj
-    WHERE type = 3 AND clean = 1
+    SELECT TOP 1000 p.ra, p.dec, s.z
+    FROM PhotoObj p
+    JOIN SpecObj s ON p.objID = s.bestObjID
+    WHERE p.type = 3 AND p.clean = 1 AND s.z IS NOT NULL
     """
     params = \
     {
