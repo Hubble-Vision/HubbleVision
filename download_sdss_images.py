@@ -15,9 +15,9 @@ def query_sdss_sql_server():
     sdss_url = 'https://skyserver.sdss.org/dr18/SkyServerWS/SearchTools/SqlSearch'
     sql_query = \
     """
-    SELECT TOP 1000 p.ra, p.dec, s.z
-    FROM PhotoObj p
-    JOIN SpecObj s ON p.objID = s.bestObjID
+    SELECT TOP 1000 p.objID, p.ra, p.dec, p.modelMag_u, p.modelMag_g, p.modelMag_r, p.modelMag_i, p.modelMag_z, p.petroRad_r, p.petroRad_g, s.z, s.zErr
+    FROM PhotoObj AS p
+    JOIN SpecObj AS s ON p.objID = s.bestObjID
     WHERE p.type = 3 AND p.clean = 1 AND s.z IS NOT NULL
     """
     params = \
@@ -64,14 +64,14 @@ def download_sdss_images():
         }
 
         try:
-            response = requests.get(sdss_url, params = params, timeout = 30)
+            response = requests.get(sdss_url, params = params, timeout = 20)
             response.raise_for_status()
 
             with open(img_file_name, 'wb') as f:
                 f.write(response.content)
             
             print(f'Saved {img_file_name}')
-            time.sleep(1)
+            time.sleep(0.2)
 
         except requests.exceptions.RequestException as e:
             print(f'Failed to download image {index}: {str(e)}')
@@ -81,9 +81,7 @@ if __name__ == '__main__':
     if not os.path.exists(CSV_FILE) or os.stat(CSV_FILE).st_size == 0:
         query_sdss_sql_server()
 
-    # Load the csv, which should by now be populated with the right ascension and declination values
     df = pd.read_csv(CSV_FILE, comment = '#')
-    # print(df.columns.tolist())
     print(f'Successfully loaded {len(df)} galaxy coordinates.')
 
     download_sdss_images()
