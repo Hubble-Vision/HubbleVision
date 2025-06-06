@@ -1,2 +1,3 @@
 venv/
 sdss_images/
+__pycache__
