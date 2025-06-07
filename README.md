@@ -3,6 +3,13 @@
 
 This project was submitted as a final project for Physics 20B - Cosmology: Humanity's Place in the Universe at the University of California, Irvine.
 
+
+
+https://github.com/user-attachments/assets/b187532d-464e-462d-a636-c8070db8a6a9
+
+
+
+
 ## How To Run
 
 ### Clone the Repository
