@@ -6,7 +6,10 @@ This project was submitted as a final project for Physics 20B - Cosmology: Human
 ## How To Run
 
 ### Clone the Repository
-``` ... ```
+```
+git clone https://github.com/sidsun1/HubbleVision.git
+cd HubbleVision
+```
 
 ### Set up a Virtual Environment
 Ensure that Python 3.12 is used for the virtual environment.
@@ -22,7 +25,10 @@ pip install -r requirements.txt
 ```
 
 ### Run the ```download_sdss_images.py``` Script
-Simply click play on the module, or run it with ```python -m download_sdss_images.py```.
+Simply click play on the module, or run it with 
+```
+python -m download_sdss_images.py
+```
 
 ### Run the Notebook
 Click `run all` in the Jupyter notebook interface in the file ```redshift_cnn.ipynb```.
